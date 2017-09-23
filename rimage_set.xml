@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form>
+	<fieldset name="basic" addfieldpath="/administrator/components/com_k2/elements/">
+		<field name="set_name" type="text" label="Set Name" />
+		<field name="set_type" type="radio" default="0" label="Select set type" description="">
+			<option value="0">Item</option>
+			<option value="1">Gallery</option>
+		</field>
+		<field name="width" type="text" label="Width" />
+		<field name="height" type="text" label="Height" />
+		<field name="quality" type="text" label="Quality" />
+    	<field name="k2categories" type="categoriesmultiple" default="" label="K2 categories" description="The K2 categories this set applies to"/>
+
+	</fieldset>
+</form>

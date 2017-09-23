@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension version="2.5" type="plugin" group="k2" method="upgrade">
+	<name>rImage K2 Plugin</name>
+	<name>rImage</name>
+	<author>Reach</author>
+	<creationDate>May 2017</creationDate>
+	<copyright>Copyright (C) 2017 Reach Web Agency. All rights reserved.</copyright>
+	<license>GNU General Public License</license>
+	<authorEmail>info@reach.gr</authorEmail>
+	<authorUrl>http://www.reach.gr</authorUrl>
+	<version>0.9.6</version>
+	<description>The rImage plugin. K2 images reimagined.</description>
+	<files>
+		<filename plugin="rimage">rimage.php</filename>
+		<filename plugin="rimage">rimage_set.xml</filename>
+		<filename>composer.json</filename>
+		<filename>composer.lock</filename>
+		<folder>classes</folder>
+		<folder>helpers</folder>
+		<folder>vendor</folder>
+		<folder>sql</folder>
+	</files>
+	 <install>
+        <sql>
+            <file driver="mysql" charset="utf8">sql/install.sql</file>
+        </sql>
+    </install>
+	<config>
+		<fields name="params">
+			<fieldset name="basic">
+				<field name="field-name" type="subform"
+				    formsource="/plugins/k2/rimage/rimage_set.xml" multiple="true"
+				    label="Subform Field" description="Subform Field Description" />
+
+			</fieldset>
+		</fields>
+	</config>	
+</extension>
