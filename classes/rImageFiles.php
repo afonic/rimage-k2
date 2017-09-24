@@ -78,7 +78,7 @@ class rImageFiles {
 
     // Get the cache folder
     public function getCacheFolder($folder) {
-    	return JPATH_SITE.'/cache/images/'.$folder.'/'.$this->id;
+    	return JPATH_SITE.'/media/rimage/'.$folder.'/'.$this->id;
     }
 
     // Get image information

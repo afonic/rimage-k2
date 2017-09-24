@@ -4,9 +4,17 @@ This is a pair of plugins for Joomla that complement K2 and Simple Image Gallery
 
 ## What does it do
 
-rImage is a plugin that uses [Intervention Image](http://image.intervention.io/) to greately enhance image manipulation in K2 and Simple Image Gallery Pro. Using the plugin parameters you can set a number of "sets" of images. These images will be generated inside the cache when the item is saved in K2 and their details will be saved in the database. You can then use your own method to pull their info from there, or use the supplied helpers to load them inside your template files or overrides.
+rImage is a plugin that uses [Intervention Image](http://image.intervention.io/) to greately enhance image manipulation in K2 and Simple Image Gallery Pro. Using the plugin parameters you can set a number of "sets" of images. These images will be generated inside the media/rimage folder when the item is saved in K2 and their details will be saved in the database. You can then use your own method to pull their info from there, or use the supplied helpers to load them inside your template files or overrides.
 
 The plugin also saves in the database (inside the rimage_gallery_hashes table) a hash of the filenames and filesizes of each gallery plus the set options in order to avoid regenerating new images when the galleries or settings have not changed.
+
+## Why?
+
+K2's image manipulation is pretty basic: you can set 6 different sizes based on width and that's it. You cannot select if you want to crop them or not, neither you can regenerate them if your settings change.
+
+Simple Image Gallery Pro will generate thumbnails but that's pretty much it. You can't have different sizes for these thumbnails and it doesn't handle the original (full size) images at all.
+
+In a modern websites, images need to manipulated in different types of ways, especially if you include extra images for social media metadata tags and more. This plugin is made in order to manage these images in any way we needed, to remove the need for external editors.
 
 ## Usage (Backend)
 
@@ -80,11 +88,11 @@ The getGallerySet('name') will return an array of objects containing the request
 An rImageHelper class also exists that can be used to call Intervention Image directly for some quick and easy resizing. You can use it like so:
 
 ```php
-$helper = new Reach\Helpers\rImageHelper();
+$helper = new Reach\Helpers\rImageHelper;
 <img src="<?php echo $helper->getImage('/path/relative/toJoomla/dir/image.jpg', 1024, 768, 70); ?>" />
 ```
 
-The getImage method will take the path of the original image, the requested width, height and quality and will return a string containing the new image path inside the cache folder. Please note that this gets generated each time the page loads, so using this class outside development is not recommended.
+The getImage method will take the path of the original image, the requested width, height and quality and will return a string containing the new image path inside the cache folder.
 
 ## Issues
 
