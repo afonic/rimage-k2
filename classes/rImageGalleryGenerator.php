@@ -15,12 +15,14 @@ class rImageGalleryGenerator {
 	protected $files;
 	protected $db;
 	protected $sets;
+	protected $library;
 
 	function __construct($id, $catid) {
 		$this->id = $id;
 		$this->files = new rImageFiles($id);
 		$this->db = new rImageDbHelper($id, $catid);	
-		$this->sets = $this->db->getSets('gallery');	
+		$this->sets = $this->db->getSets('gallery');
+		$this->library = $this->db->getLibrary();
 	}
 
 	// The function to call all subfunctions
@@ -59,7 +61,7 @@ class rImageGalleryGenerator {
 	// Creates the images in the cache
 	protected function generateImage($image) {
 		try {
-			$generate = new rImageGenerator($image);
+			$generate = new rImageGenerator($image, $this->library);
 			$generate->save();
 			$this->db->addImage($image, 'gallery');
 		}

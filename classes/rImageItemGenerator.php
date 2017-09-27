@@ -52,7 +52,7 @@ class rImageItemGenerator extends rImageGalleryGenerator {
 	// Creates the images in the cache
 	protected function generateImage($image) {
 		try {
-			$generate = new rImageGenerator($image);
+			$generate = new rImageGenerator($image, $this->library);
 			$generate->save();
 			$this->db->addImage($image, 'item');
 		}

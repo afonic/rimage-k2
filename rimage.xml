@@ -20,18 +20,21 @@
 		<folder>vendor</folder>
 		<folder>sql</folder>
 	</files>
-	 <install>
-        <sql>
-            <file driver="mysql" charset="utf8">sql/install.sql</file>
-        </sql>
-    </install>
+	<install>
+		<sql>
+			<file driver="mysql" charset="utf8">sql/install.sql</file>
+		</sql>
+	</install>
 	<config>
 		<fields name="params">
 			<fieldset name="basic">
-				<field name="field-name" type="subform"
+				<field name="image-sets" type="subform"
 				    formsource="/plugins/k2/rimage/rimage_set.xml" multiple="true"
-				    label="Subform Field" description="Subform Field Description" />
-
+				    label="Image Sets" description="Add the image sets that you want to generate on each item's save." />
+				<field name="imagelibrary" type="radio" default="0" label="Image Proccesing Library" description="Select between GD and Imagemagick for image proccesing. Imagemagick has to be enabled in your PHP installation.">
+					<option value="0">GD</option>
+					<option value="1">Imagemagick</option>
+				</field>
 			</fieldset>
 		</fields>
 	</config>	

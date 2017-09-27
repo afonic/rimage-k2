@@ -20,7 +20,7 @@ In a modern websites, images need to manipulated in different types of ways, esp
 
 First you need to download this plugin as well as the [System Plugin](https://github.com/afonic/rimage-system), install them using Joomla and enable them. Then set "sets" you want to use inside the K2 plugin's parameters. 
 
-The options you have inside the K2 plugin are:
+The options you have for each set are:
 
 * *Set Name* The name of this set. This will be used to call the specific images later on.
 * *Set type* If this set refers to K2's item image or at the item's image gallery.
@@ -29,7 +29,9 @@ The options you have inside the K2 plugin are:
 * *Quality* Refers to jpeg save quality.
 * *K2 categories* Select the categories this set will apply to.
 
-When both plugins are enabled, the sets that are configured will be generated at each item save and their relevant info will be saved in the database, in the rimage_gallery_images and rimage_item_images tables.
+The sets that are configured will be generated at each item save and their relevant info will be saved in the database, in the rimage_gallery_images and rimage_item_images tables.
+
+Inside the K2 plugin you can also select between the GD library (default) or Imagemagick for image processing. Generally, GD is usually faster for resizing and creates a smaller file for the same quality setting. Imagemagick must be installed and enabled for your PHP installation, but usually generates images with better colors. You can easily switch between the two and try for yourself!
 
 There is a way to generate all images at once. Simply add
 
@@ -92,7 +94,7 @@ $helper = new Reach\Helpers\rImageHelper;
 <img src="<?php echo $helper->getImage('/path/relative/toJoomla/dir/image.jpg', 1024, 768, 70); ?>" />
 ```
 
-The getImage method will take the path of the original image, the requested width, height and quality and will return a string containing the new image path inside the cache folder.
+The getImage method will take the path of the original image, the requested width, height and quality and will return a string containing the new image path inside the *cache* folder. This method uses the GD library and ignores the relevant K2 plugin setting.
 
 ## Issues
 
@@ -102,4 +104,3 @@ The getImage method will take the path of the original image, the requested widt
 * It also won't delete unused files. So if you delete a file from a gallery, it will remove it from the database (meaning you won't call non existing files) but it will not remove the physical cached file. _This will implemented in the future._
 * K2 will still generate its cache images and Simple Image Gallery Pro its thumbnails, this plugin will not disable that.
 * There are no plans to provide Joomla auto-update support or stable releases. Just download the repository and install using Joomla.
-* Intervention Image uses GD by default. If you want to use Imagemagick you have to fork the repository and [change the setting](http://image.intervention.io/getting_started/configuration). _This will implemented as a plugin setting in the future._

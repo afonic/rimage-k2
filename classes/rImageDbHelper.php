@@ -42,7 +42,7 @@ class rImageDbHelper {
 
 		$sets = array();		
 
-		foreach ($dbData['field-name'] as $imgSet) {
+		foreach ($dbData['image-sets'] as $imgSet) {
 			if ((in_array($this->catid, $imgSet['k2categories'])) and ($type == $imgSet['set_type'])) {
 				$set = new \stdClass;
 				$set->name = $imgSet['set_name'];
@@ -169,6 +169,24 @@ class rImageDbHelper {
 		catch (Exception $e) {
 			echo 'Cannot delete image entry. Caught exception: ', $e->getMessage(), "\n";
 		}
+	}
+
+	// Get the image gallery setting
+	public function getLibrary() {
+		$query = $this->db->getQuery(true);
+		$query->select($this->db->quoteName(array('params')));
+		$query->from($this->db->quoteName('#__extensions'));
+		$query->where($this->db->quoteName('element') . ' = '. $this->db->quote('rimage'), 'AND');
+		$query->where($this->db->quoteName('folder') . ' = '. $this->db->quote('k2'));
+		$this->db->setQuery($query);
+		$dbData = json_decode($this->db->loadResult(), true);
+
+		if ($dbData['imagelibrary'] == 1) {
+			return 'imagick';
+		}
+
+		return 'gd';
+
 	}
 
 }

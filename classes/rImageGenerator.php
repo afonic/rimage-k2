@@ -11,9 +11,9 @@ class rImageGenerator {
 	protected $manager;
 	protected $image;
 
-	function __construct(rImage $image) {
+	function __construct(rImage $image, $library) {
 		$this->image = $image;
-		$this->manager = new ImageManager();
+		$this->manager = new ImageManager(array('driver' => $library));
 	}
 
 
