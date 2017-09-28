@@ -16,6 +16,10 @@ Simple Image Gallery Pro will generate thumbnails but that's pretty much it. You
 
 In a modern websites, images need to manipulated in different types of ways, especially if you include extra images for social media metadata tags and more. This plugin is made in order to manage these images in any way we needed, to remove the need for external editors.
 
+## Install
+
+Download the latest [K2 plugin](https://github.com/afonic/rimage-k2/archive/master.zip) and the latest [system plugin](https://github.com/afonic/rimage-system/archive/master.zip). Install both through the Joomla extension manager and enable them in Extensions -> Plugins.
+
 ## Usage (Backend)
 
 First you need to download this plugin as well as the [System Plugin](https://github.com/afonic/rimage-system), install them using Joomla and enable them. Then set "sets" you want to use inside the K2 plugin's parameters. 
