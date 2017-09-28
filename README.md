@@ -22,7 +22,7 @@ Download the latest [K2 plugin](https://github.com/afonic/rimage-k2/archive/mast
 
 ## Usage (Backend)
 
-First you need to download this plugin as well as the [System Plugin](https://github.com/afonic/rimage-system), install them using Joomla and enable them. Then set "sets" you want to use inside the K2 plugin's parameters. 
+The plugin's parameters are all inside the K2 plugin. 
 
 The options you have for each set are:
 
