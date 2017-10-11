@@ -7,19 +7,23 @@ use Intervention\Image\ImageManager;
 class rImageHelper {
 
 	protected $manager;
+	protected $folder;
 
 	function __construct() {
 		$this->manager = new ImageManager();
+		$this->folder = '/cache/images/';
 	}
 
 	
 	public function getImage($image, $width, $height, $quality) {
 
-		$path = '/cache/images/img_'.md5($image.$width.$height.$quality).'.jpg';
+		$path = $this->folder.'img_'.md5($image.$width.$height.$quality).'.jpg';
 
 		if ($this->checkCache($path)) {
 			return $path;
 		}
+
+		$this->generateCacheFolder();
 		
 		$img = $this->manager->make(JPATH_ROOT.$image);
 
@@ -38,6 +42,17 @@ class rImageHelper {
 
 	private function checkCache($path) {		
         return file_exists(JPATH_ROOT.$path);
+    }
+
+    // Creates the folder in the cache
+    private function generateCacheFolder() {
+        if (!file_exists(JPATH_ROOT.$this->folder)) {
+            try {
+                mkdir(JPATH_ROOT.$this->folder, 0755, true); }
+            catch (Exception $e) {
+                echo 'Folder cannot be created. Caught exception: ', $e->getMessage(), "\n";
+            }
+        }
     }
 
 
