@@ -18,10 +18,6 @@ use Reach\rImageDbHelper;
 use Reach\rImageGalleryGenerator;
 use Reach\rImageItemGenerator;
 
-/**
- * Example K2 Plugin to render YouTube URLs entered in backend K2 forms to video players in the frontend.
- */
-
 // Load the K2 Plugin API
 JLoader::register('K2Plugin', JPATH_ADMINISTRATOR.'/components/com_k2/lib/k2plugin.php');
 
@@ -30,7 +26,7 @@ class plgK2rImage extends K2Plugin
 {
 
 	// Some params
-	var $pluginName = 'rImage';
+	var $pluginName = 'rimage';
 	var $pluginNameHumanReadable = 'K2 images reimagined.';
 
 
