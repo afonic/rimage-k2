@@ -43,7 +43,11 @@ class rImageFiles {
 		if (is_dir($dir)) {
 			$files = array();
 			try {
-				$images = glob($dir.'*.[jJ][pP][gG]');
+                $images = array_merge(
+                    glob($dir.'*.[jJ][pP][gG]'), 
+                    glob($dir.'*.[jJ][pP][eE][gG]'),
+                    glob($dir.'*.[pP][nN][gG]')
+                );
 				foreach ($images as $image) {
 					$img = new \stdClass;
 					$img->path = $image;
