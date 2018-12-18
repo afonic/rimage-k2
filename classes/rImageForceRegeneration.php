@@ -35,6 +35,13 @@ class rImageForceRegeneration {
 				$this->generateGallerySets($item->id, $item->catid);
 			}
 		}
+	}	
+
+	public function regenerateSingle($id, $catid, $gallery = null) {
+		$this->generateItemSets($id, $catid);
+		if ($gallery) {
+			$this->generateGallerySets($id, $catid);
+		}
 	}
 
 	protected function generateItemSets($id, $catid) {
