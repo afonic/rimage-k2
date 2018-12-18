@@ -9,7 +9,14 @@
 		<field name="width" type="text" label="Width" />
 		<field name="height" type="text" label="Height" />
 		<field name="quality" type="text" label="Quality" />
+		<field name="ratio" type="radio" default="0" label="Keep aspect ratio" description="If set to yes, only the biggest width or height will be used and the other will be calcuated based on ratio.">
+			<option value="0">Crop as needed</option>
+			<option value="1">Yes</option>
+		</field>
     	<field name="k2categories" type="categoriesmultiple" default="" label="K2 categories" description="The K2 categories this set applies to"/>
-
+		<field name="k2selectsubcategories" type="radio" default="0" label="Also select subcategories" description="">
+			<option value="0">No</option>
+			<option value="1">Yes</option>
+		</field>
 	</fieldset>
 </form>

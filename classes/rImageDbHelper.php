@@ -43,12 +43,13 @@ class rImageDbHelper {
 		$sets = array();		
 
 		foreach ($dbData['image-sets'] as $imgSet) {
-			if ((in_array($this->catid, $imgSet['k2categories'])) and ($type == $imgSet['set_type'])) {
+			if (($this->checkCategories($imgSet['k2categories'], $imgSet['k2selectsubcategories'])) and ($type == $imgSet['set_type'])) {
 				$set = new \stdClass;
 				$set->name = $imgSet['set_name'];
 				$set->width = $imgSet['width'];
 				$set->height = $imgSet['height'];
-				$set->quality = $imgSet['quality'];	
+				$set->quality = $imgSet['quality'];
+				$set->ratio = $imgSet['ratio'];
 				$sets[$imgSet['set_name']] = $set;			
 			}			
 		}
@@ -56,6 +57,35 @@ class rImageDbHelper {
 		return $sets;		
 	}
 
+	// Check if the item's category has a set configured
+	public function checkCategories($categories, $children) {
+		if (in_array($this->catid, $categories)) {
+			return true;
+		}
+		if ($children) {
+			$childs = $this->getChildK2Categories($categories);
+			foreach ($childs as $child) {
+				if (in_array($child->parent, $categories)) {
+					$categories[] = $child->id;
+				}
+			}
+			if (in_array($this->catid, $categories)) {
+				return true;
+			}
+		}
+
+	}
+	
+	// Get all parent categories from database
+	protected function getChildK2Categories($categories) {		
+		$query = $this->db->getQuery(true);
+		$query->select($this->db->quoteName(array('id', 'parent')));
+		$query->from($this->db->quoteName('#__k2_categories'));
+		$query->where($this->db->quoteName('published') . ' = 1');
+		$query->where($this->db->quoteName('parent') . ' != 0');
+		$this->db->setQuery($query);
+		return $this->db->loadObjectList('id');
+	}
 
 	// Check the the gallery's files have been changed by comparing hashes
 	public function hashChanged() {
