@@ -6,10 +6,10 @@
 			<option value="0">Item</option>
 			<option value="1">Gallery</option>
 		</field>
-		<field name="width" type="text" label="Width" />
+		<field name="width" type="text" label="Width / Long Edge" />
 		<field name="height" type="text" label="Height" />
 		<field name="quality" type="text" label="Quality" />
-		<field name="ratio" type="radio" default="0" label="Keep aspect ratio" description="If set to yes, only the biggest width or height will be used and the other will be calcuated based on ratio.">
+		<field name="ratio" type="radio" default="0" label="Keep aspect ratio" description="If set to yes, the longest edge of the image will be set the the width size and the other will be calculated based on ratio.">
 			<option value="0">Crop as needed</option>
 			<option value="1">Yes</option>
 		</field>

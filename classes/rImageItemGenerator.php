@@ -43,7 +43,8 @@ class rImageItemGenerator extends rImageGalleryGenerator {
 				$set->name,
 				$set->width,
 				$set->height,
-				$set->quality
+				$set->quality,
+				$set->ratio
 			);
 			$this->generateImage($img);
 		}		

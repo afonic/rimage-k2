@@ -22,11 +22,23 @@ class rImageGenerator {
 		
 		$img = $this->manager->make($this->image->path);
 
-		// If we set 0 to width that means we just want to optimize
-		if ($this->image->width > 1) {
-			$img->fit($this->image->width, $this->image->height, function ($constraint) {
-			//$constraint->upsize();
-			});
+		if ($this->image->ratio == '1') {
+			if ($img->width() >= $img->height()) {
+				$img->resize($this->image->width, null, function ($constraint) {
+				    $constraint->aspectRatio();
+				});
+			} else {
+				$img->resize(null, $this->image->width, function ($constraint) {
+				    $constraint->aspectRatio();
+				});
+			}
+		} else {
+			// If we set 0 to width that means we just want to optimize
+			if ($this->image->width > 1) {
+				$img->fit($this->image->width, $this->image->height, function ($constraint) {
+				//$constraint->upsize();
+				});
+			}
 		}
 
 		$img->interlace();

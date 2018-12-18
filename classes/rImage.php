@@ -11,15 +11,17 @@ class rImage {
 	public $width;
 	public $height;
 	public $quality;
+	public $ratio;
 	public $position;
 
-	function __construct($path, $dir, $set, $width, $height, $quality) {
+	function __construct($path, $dir, $set, $width, $height, $quality, $ratio = null) {
 		$this->path = $path;
 		$this->dir = $dir;
 		$this->set = $set;
 		$this->width = $width;
 		$this->height = $height;
-		$this->quality = $quality;	
+		$this->quality = $quality;
+		$this->ratio = $ratio;
 	}
 
 	public function setPosition($position) {
