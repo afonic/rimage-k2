@@ -28,12 +28,16 @@ The options you have for each set are:
 
 * *Set Name* The name of this set. This will be used to call the specific images later on.
 * *Set type* If this set refers to K2's item image or at the item's image gallery.
-* *Width* The required width. Set this to 0 to just optimize the file and leave the dimensions intact.
+* *Width / Long Edge* The required width. Set this to 0 to just optimize the file and leave the dimensions intact. If keep aspect ratio is set to yes, this is the size that the long dimension of the image will have (long edge)
 * *Height* The same for height.
 * *Quality* Refers to jpeg save quality.
+* *Keep aspect ratio* If set to yes it will resize the image by keeping the aspect ratio. By default, it crops the image to get it to the required size.
 * *K2 categories* Select the categories this set will apply to.
+* * Also select subcategories* By setting this to yes, the set will apply to items that are in children categories of the ones selected.
 
 The sets that are configured will be generated at each item save and their relevant info will be saved in the database, in the rimage_gallery_images and rimage_item_images tables.
+
+In case the automatic generation fails for some reason, inside each K2 item's edit form toolbar you can find a button named "Regenerate images" that will manually regenerate all images for the item you are currently editing. You can turn this feature on / off at the system plugin's options.
 
 Inside the K2 plugin you can also select between the GD library (default) or Imagemagick for image processing. Generally, GD is usually faster for resizing and creates a smaller file for the same quality setting. Imagemagick must be installed and enabled for your PHP installation, but usually generates images with better colors. You can easily switch between the two and try for yourself!
 
