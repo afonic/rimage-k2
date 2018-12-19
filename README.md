@@ -12,7 +12,7 @@ The plugin also saves in the database (inside the rimage_gallery_hashes table) a
 
 K2's image manipulation is pretty basic: you can set 6 different sizes based on width and that's it. You cannot select if you want to crop them or not, neither you can regenerate them if your settings change.
 
-Simple Image Gallery Pro will generate thumbnails but that's pretty much it. You can't have different sizes for these thumbnails and it doesn't handle the original (full size) images at all.
+Simple Image Gallery Pro will generate thumbnails but that's pretty much it. You can't have different sizes for these thumbnails and it doesn't handle the original (full size) images at all. Plus it has no way to manage the order of the items, which this plugin does.
 
 In a modern websites, images need to manipulated in different types of ways, especially if you include extra images for social media metadata tags and more. This plugin is made in order to manage these images in any way we needed, to remove the need for external editors.
 
@@ -22,7 +22,7 @@ Download the latest [K2 plugin](https://github.com/afonic/rimage-k2/archive/mast
 
 ## Usage (Backend)
 
-The plugin's parameters are all inside the K2 plugin. 
+The plugin's parameters inside the K2 plugin. 
 
 The options you have for each set are:
 
@@ -33,11 +33,13 @@ The options you have for each set are:
 * *Quality* Refers to jpeg save quality.
 * *Keep aspect ratio* If set to yes it will resize the image by keeping the aspect ratio. By default, it crops the image to get it to the required size.
 * *K2 categories* Select the categories this set will apply to.
-* * Also select subcategories* By setting this to yes, the set will apply to items that are in children categories of the ones selected.
+* *Also select subcategories* By setting this to yes, the set will apply to items that are in children categories of the ones selected.
 
 The sets that are configured will be generated at each item save and their relevant info will be saved in the database, in the rimage_gallery_images and rimage_item_images tables.
 
-In case the automatic generation fails for some reason, inside each K2 item's edit form toolbar you can find a button named "Regenerate images" that will manually regenerate all images for the item you are currently editing. You can turn this feature on / off at the system plugin's options.
+In case the automatic generation fails for some reason, inside each K2 item's edit form toolbar you can find a button named "Regenerate images" that will manually regenerate all images for the item you are currently editing. You can turn this feature on / off at the system plugin's options (on by default).
+
+Also, in K2's edit item toolbar you will now find an "Order gallery" button. This will open a popup with your images, which you can drag and drop in order to change the appearance order. Please note that this affects only the order of the images in the array in the frontend and not Simple Image Gallery Pro. It gets saved automatically each time you move an item. You can also disable this at the system plugin's options.
 
 Inside the K2 plugin you can also select between the GD library (default) or Imagemagick for image processing. Generally, GD is usually faster for resizing and creates a smaller file for the same quality setting. Imagemagick must be installed and enabled for your PHP installation, but usually generates images with better colors. You can easily switch between the two and try for yourself!
 
