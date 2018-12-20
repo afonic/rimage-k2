@@ -18,7 +18,7 @@ In a modern websites, images need to manipulated in different types of ways, esp
 
 ## Install
 
-Download the latest [K2 plugin](https://github.com/afonic/rimage-k2/archive/master.zip) and the latest [system plugin](https://github.com/afonic/rimage-system/archive/master.zip). Install both through the Joomla extension manager and enable them in Extensions -> Plugins.
+Download the latest [K2 plugin](https://github.com/afonic/rimage-k2/archive/master.zip) and the latest [system plugin](https://github.com/afonic/rimage-system/archive/v0.1.zip). Install both through the Joomla extension manager and enable them in Extensions -> Plugins.
 
 ## Usage (Backend)
 
@@ -110,7 +110,6 @@ The getImage method will take the path of the original image, the requested widt
 
 * The global regeneration is too slow to be reliably used in a production enviroment.
 * The plugin won't manage the image titles and captions.
-* It assumes you upload valid jpg images. It won't work with png, gif etc.  _This will implemented in the future._
 * It also won't delete unused files. So if you delete a file from a gallery, it will remove it from the database (meaning you won't call non existing files) but it will not remove the physical cached file. _This will implemented in the future._
 * K2 will still generate its cache images and Simple Image Gallery Pro its thumbnails, this plugin will not disable that.
 * There are no plans to provide Joomla auto-update support or stable releases. Just download the repository and install using Joomla.
