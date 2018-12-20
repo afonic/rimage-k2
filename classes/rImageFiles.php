@@ -28,6 +28,14 @@ class rImageFiles {
 	// Check if the item has a main image
 	public function hasImage() {
 		return file_exists(JPATH_ROOT.$this->getImage());
+	}	
+
+	// Check if the item has a gallery
+	public function hasGallery() {
+		if (count($this->getFiles()) > 0) {
+			return true;
+		}
+		return false;
 	}
 
 	// Location of the main K2 image

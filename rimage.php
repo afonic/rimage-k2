@@ -46,9 +46,9 @@ class plgK2rImage extends K2Plugin
 			$itemGenerator->generate();
 		}
 
-		if ($item->gallery) {
+		if ($files->hasGallery()) {
 			$helper = new rImageDbHelper($item->id, $item->catid);
-			$generator = new rImageGalleryGenerator($item->id, $item->catid);	
+			$generator = new rImageGalleryGenerator($item->id, $item->catid);
 
 			if ($helper->hashChanged()) {
 				$generator->generate();
