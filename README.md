@@ -18,7 +18,7 @@ In a modern websites, images need to manipulated in different types of ways, esp
 
 ## Install
 
-Download the latest [K2 plugin](https://github.com/afonic/rimage-k2/archive/master.zip) and the latest [system plugin](https://github.com/afonic/rimage-system/archive/master.zip). Install both through the Joomla extension manager and enable them in Extensions -> Plugins.
+Download the latest [K2 plugin](https://github.com/afonic/rimage-k2/archive/master.zip) and the latest [system plugin](https://github.com/afonic/rimage-system/archive/v0.1.zip). Install both through the Joomla extension manager and enable them in Extensions -> Plugins.
 
 ## Usage (Backend)
 
