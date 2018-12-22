@@ -63,7 +63,7 @@ class rImageDbHelper {
 			return true;
 		}
 		if ($children) {
-			$childs = $this->getChildK2Categories($categories);
+			$childs = $this->getChildK2Categories();
 			foreach ($childs as $child) {
 				if (in_array($child->parent, $categories)) {
 					$categories[] = $child->id;
@@ -77,7 +77,7 @@ class rImageDbHelper {
 	}
 	
 	// Get all parent categories from database
-	protected function getChildK2Categories($categories) {		
+	protected function getChildK2Categories() {		
 		$query = $this->db->getQuery(true);
 		$query->select($this->db->quoteName(array('id', 'parent')));
 		$query->from($this->db->quoteName('#__k2_categories'));
