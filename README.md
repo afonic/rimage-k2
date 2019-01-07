@@ -18,7 +18,7 @@ In a modern websites, images need to manipulated in different types of ways, esp
 
 ## Install
 
-Download the latest [K2 plugin](https://github.com/afonic/rimage-k2/archive/1.1.zip) and the latest [system plugin](https://github.com/afonic/rimage-system/archive/1.1.zip). Install both through the Joomla extension manager and enable them in Extensions -> Plugins.
+Download the latest [K2 plugin](https://github.com/afonic/rimage-k2/archive/1.1.zip) and the latest [system plugin](https://github.com/afonic/rimage-system/archive/1.1.01.zip). Install both through the Joomla extension manager and enable them in Extensions -> Plugins.
 
 ## Usage (Backend - K2 Plugin parameters)
 
@@ -103,14 +103,6 @@ The getGallerySet('name') will return an array of objects containing the request
 <?php endforeach; ?>
 ```
 
-## Notice for Simple Image Gallery Pro users
-
-This plugin is a drop-in replacement. That means that if you unistall Sigpro and install RImage your galleries will be preserved and you will see the images right away in RImage image manager.
-
-Of course, this will break the frontend as this plugin does not handle it at all. However it will still generate (or remove if you deleted all files) the needed {gallery}id{/gallery} text in each K2 item's gallery column, so you can implement your own frontend plugin, or even keep using Sigpro in the frontend.
-
-To avoid confusion, this plugin hides K2's Image Gallery tab. You can change that behaviour in the system plugin's settings.
-
 ## Other methods
 
 An rImageHelper class also exists that can be used to call Intervention Image directly for some quick and easy resizing. You can use it like so:
@@ -121,6 +113,14 @@ $helper = new Reach\Helpers\rImageHelper;
 ```
 
 The getImage method will take the path of the original image, the requested width, height and quality and will return a string containing the new image path inside the *cache* folder. This method uses the GD library and ignores the relevant K2 plugin setting.
+
+## Notice for Simple Image Gallery Pro users
+
+This plugin is a drop-in replacement. That means that if you unistall Sigpro and install RImage your galleries will be preserved and you will see the images right away in RImage image manager.
+
+Of course, this will break the frontend as this plugin does not handle it at all. However it will still generate (or remove if you deleted all files) the needed {gallery}id{/gallery} text in each K2 item's gallery column, so you can implement your own frontend plugin, or even keep using Sigpro in the frontend.
+
+To avoid confusion, this plugin hides K2's Image Gallery tab. You can change that behaviour in the system plugin's settings.
 
 ## Issues
 
