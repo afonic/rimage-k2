@@ -1,12 +1,4 @@
 <?php
-/**
- * @version		2.2
- * @package		Example K2 Plugin (K2 plugin)
- * @author		JoomlaWorks - http://www.joomlaworks.net
- * @copyright	Copyright (c) 2006 - 2014 JoomlaWorks Ltd. All rights reserved.
- * @license		GNU/GPL license: http://www.gnu.org/copyleft/gpl.html
- */
-
 // no direct access
 defined('_JEXEC') or die ;
 
@@ -21,41 +13,60 @@ use Reach\rImageItemGenerator;
 // Load the K2 Plugin API
 JLoader::register('K2Plugin', JPATH_ADMINISTRATOR.'/components/com_k2/lib/k2plugin.php');
 
-// Initiate class to hold plugin events
 class plgK2rImage extends K2Plugin
 {
 
-	// Some params
-	var $pluginName = 'rimage';
-	var $pluginNameHumanReadable = 'K2 images reimagined.';
+    // Some params
+    public $pluginName = 'rimage';
+    public $pluginNameHumanReadable = 'K2 images reimagined.';
 
 
-	function __construct(&$subject, $params)
-	{
-		parent::__construct($subject, $params);
-	}
+    public function __construct(&$subject, $params)
+    {
+        parent::__construct($subject, $params);
+    }
 
-	function onAfterK2Save(&$item)
+    /**
+     * After a K2 item is saved, we need to proccess the images
+     * 
+     * @param Object $item The K2 item
+     * 
+     * @return null
+     */
+    public function onAfterK2Save(&$item)
+    {
+        $files = new rImageFiles($item->id);
+        $itemGenerator = new rImageItemGenerator($item->id, $item->catid);
 
-	{
+        if ($files->hasImage()) {
+            $itemGenerator->generate();
+        }
 
-		$files = new rImageFiles($item->id);
-		$itemGenerator = new rImageItemGenerator($item->id, $item->catid);
+        if ($files->hasGallery()) {
+            $helper = new rImageDbHelper($item->id, $item->catid);
+            $generator = new rImageGalleryGenerator($item->id, $item->catid);
 
-		if ($files->hasImage()) {
-			$itemGenerator->generate();
-		}
+            if ($helper->hashChanged()) {
+                $generator->generate();
+            }
+        }
+    }
 
-		if ($files->hasGallery()) {
-			$helper = new rImageDbHelper($item->id, $item->catid);
-			$generator = new rImageGalleryGenerator($item->id, $item->catid);
-
-			if ($helper->hashChanged()) {
-				$generator->generate();
-			}
-
-		}
-		
-	}
-
-} // END CLASS
+    /**
+     * If the item has a gallery we need to set the gallery to the correct value
+     *
+     * @param Object $item       The K2 item
+     * @param array  $params     The parameters of the plugin
+     * @param int    $limitstart Don't know what this does
+     *
+     * @return null
+     */
+    public function onK2PrepareContent(&$item, &$params, $limitstart)
+    {
+        $files = new rImageFiles($item->id);
+        if ($files->hasGallery()) {
+            $item->gallery = '{gallery}'.$item->id.'{/gallery}';
+        }
+    }
+    
+}
