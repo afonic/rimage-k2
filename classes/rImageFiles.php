@@ -3,102 +3,112 @@
 namespace Reach;
 
 // This class messes with the filesystem
-class rImageFiles {
+class rImageFiles
+{
+    protected $files;
+    protected $dir;
+    protected $id;
 
-	protected $files;
-	protected $dir;
-	protected $id;
+    public function __construct($id)
+    {
+        $this->files = $this->getGalleryFiles($id);
+        $this->dir = $this->getGalleryDir($id);
+        $this->id = $id;
+    }
 
-	function __construct($id) {
-		$this->files = $this->getGalleryFiles($id);
-		$this->dir = $this->getGalleryDir($id);
-		$this->id = $id;
-	}
+    // Get the files array
+    public function getFiles()
+    {
+        return $this->files;
+    }
 
-	// Get the files array
-	public function getFiles() {
-		return $this->files;
-	}
+    // Get the gallery's directory
+    public function getDir()
+    {
+        return $this->dir;
+    }
 
-	// Get the gallery's directory
-	public function getDir() {
-		return $this->dir;
-	}
+    // Check if the item has a main image
+    public function hasImage()
+    {
+        return file_exists(JPATH_ROOT.$this->getImage());
+    }
 
-	// Check if the item has a main image
-	public function hasImage() {
-		return file_exists(JPATH_ROOT.$this->getImage());
-	}	
+    // Check if the item has a gallery
+    public function hasGallery()
+    {
+        if (count($this->getFiles()) > 0) {
+            return true;
+        }
+        return false;
+    }
 
-	// Check if the item has a gallery
-	public function hasGallery() {
-		if (count($this->getFiles()) > 0) {
-			return true;
-		}
-		return false;
-	}
-
-	// Location of the main K2 image
-    public function getImage() {
+    // Location of the main K2 image
+    public function getImage()
+    {
         return "/media/k2/items/src/".md5("Image".$this->id).".jpg";
     }
 
-	// Generate the array containing the filepath and filesize of each image of the gallery
-	private function getGalleryFiles($id) {
+    // Generate the array containing the filepath and filesize of each image of the gallery
+    private function getGalleryFiles($id)
+    {
+        $dir = $this->getGalleryDir($id);
 
-		$dir = $this->getGalleryDir($id);
-
-		if (is_dir($dir)) {
-			$files = array();
-			try {
+        if (is_dir($dir)) {
+            $files = array();
+            try {
                 $images = array_merge(
-                    glob($dir.'*.[jJ][pP][gG]'), 
-                    glob($dir.'*.[jJ][pP][eE][gG]'),
-                    glob($dir.'*.[pP][nN][gG]')
+                    (array)glob($dir.'*.[jJ][pP][gG]'),
+                    (array)glob($dir.'*.[jJ][pP][eE][gG]'),
+                    (array)glob($dir.'*.[pP][nN][gG]')
                 );
-				foreach ($images as $image) {
-					$img = new \stdClass;
-					$img->path = $image;
-					$img->size = filesize($image);
-					$files[] = $img;
-				}
-			}
-			catch (Exception $e) {
-				echo 'Cannot list files. Caught exception: ', $e->getMessage(), "\n";
-			}
-		}
+                foreach ($images as $image) {
+                    if ($image) {
+                        $img = new \stdClass;
+                        $img->path = $image;
+                        $img->size = filesize($image);
+                        $files[] = $img;
+                    }
+                }
+            } catch (Exception $e) {
+                echo 'Cannot list files. Caught exception: ', $e->getMessage(), "\n";
+            }
+        }
 
-		return $files;
-		
-	}
+        return $files;
+    }
 
-	// Get the gallery's directory path
-	public function getGalleryDir($id) {
-		return JPATH_ROOT.'/media/k2/galleries/'.$id.'/';
-	}
+    // Get the gallery's directory path
+    public function getGalleryDir($id)
+    {
+        return JPATH_ROOT.'/media/k2/galleries/'.$id.'/';
+    }
 
-	// Creates the folder in the cache
-    public function generateCacheFolder($folder) {
+    // Creates the folder in the cache
+    public function generateCacheFolder($folder)
+    {
         if (!file_exists($this->getCacheFolder($folder))) {
             try {
-                mkdir($this->getCacheFolder($folder), 0755, true); }
-            catch (Exception $e) {
+                mkdir($this->getCacheFolder($folder), 0755, true);
+            } catch (Exception $e) {
                 echo 'Folder cannot be created. Caught exception: ', $e->getMessage(), "\n";
             }
         }
     }
 
     // Get the cache folder
-    public function getCacheFolder($folder) {
-    	return JPATH_SITE.'/media/rimage/'.$folder.'/'.$this->id;
+    public function getCacheFolder($folder)
+    {
+        return JPATH_SITE.'/media/rimage/'.$folder.'/'.$this->id;
     }
 
     // Get image information
-    public function getImageInfo(rImage $image) {
-    	$img = getimagesize($image->path);
-    	$info = new \stdClass;
-    	$info->width = $img[0];
-    	$info->height = $img[1];
-    	return $info;
+    public function getImageInfo(rImage $image)
+    {
+        $img = getimagesize($image->path);
+        $info = new \stdClass;
+        $info->width = $img[0];
+        $info->height = $img[1];
+        return $info;
     }
 }
