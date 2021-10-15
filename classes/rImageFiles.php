@@ -37,7 +37,7 @@ class rImageFiles
     // Check if the item has a gallery
     public function hasGallery()
     {
-        if (count($this->getFiles()) > 0) {
+        if (is_countable($this->getFiles()) && count($this->getFiles()) > 0) {
             return true;
         }
         return false;
